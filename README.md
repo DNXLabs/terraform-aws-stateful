@@ -15,7 +15,7 @@ In addition you have the option to create or not :
      - alb - An external ALB
 
  - Route 53 (requires ALB)
-     - ALB URL poiting to a hostname
+     - ALB URL pointing to a hostname
 
 ## Usage
 
