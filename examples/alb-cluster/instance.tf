@@ -8,7 +8,7 @@ module "alb_stateful" {
   public_subnet_ids  = data.aws_subnet_ids.public.ids
   secure_subnet_ids  = data.aws_subnet_ids.secure.ids
   enable_alb         = true
-  hostname_create    = true 
+  hostname_create    = true
   hostnames          = local.workspace["hostnames"]
   hosted_zone        = local.workspace["hosted_zone"]
   certificate_arn    = data.aws_acm_certificate.domain_host.arn

@@ -3,7 +3,7 @@ variable "name" {
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  default     = "t2.micro"
   description = "EC2 instance type"
 }
 
@@ -64,12 +64,12 @@ variable "security_group_ids" {
 }
 
 variable "hostname_create" {
-  default = false
+  default     = false
   description = "Wheter to create the hostnames on Route 53"
 }
 
 variable "hosted_zone" {
-  default = ""
+  default     = ""
   description = "Route 53 hosted zone"
 }
 
