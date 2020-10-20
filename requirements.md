@@ -1,0 +1,6 @@
+- ec2
+- launch template with extra user data
+- subnet
+- alb (internal or external)
+- instance type
+- 
