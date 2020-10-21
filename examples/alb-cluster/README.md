@@ -17,13 +17,13 @@ This examples shows:
 |------|-------------|------|---------|:-----:|
 | aws\_account\_id | n/a | `any` | n/a | yes |
 | aws\_role | n/a | `any` | n/a | yes |
-| account\_name | `any` | `string` | `"eu-west-1"` | no |
-| region | AWS Region | `string` | `"runners-default"` | no |
-| instance_type | Default: t2.micro | `string` | `"https://gitlab.com"` | no |
-| hosted_zone | Root hosted zone | `string` | `"https://gitlab.com"` | no |
-| hostnames | n/a | DNS to be created on Route 53 | `"generated/id_rsa"` | no |
-| custom_efs_dir | Which folder EFS will be mounted | `string` | `"generated/id_rsa.pub"` | no |
-| instance_count | number of EC2 instances running - must be 1 to use an Elastic IP | `any` | n/a | yes |
+| account\_name | `any` | `string` | n/a | no |
+| region | AWS Region | `string` | n/a | no |
+| instance_type | EC2 instance type | `string` | t2.micro | no |
+| hosted_zone | Root hosted zone | `string` | n/a | no |
+| hostnames | n/a | DNS to be created on Route 53 | n/a | no |
+| custom_efs_dir | Which folder EFS will be mounted | `string` | `/mnt/efs` | no |
+| instance_count | number of EC2 instances running | `any` | n/a | yes |
 | enable_alb | Enables ALB | `any` | n/a | yes |
 | hostname_create | Creates a DNS record poiting to the ALB URL | `any` | n/a | yes |
 
