@@ -1,16 +1,15 @@
 # Example - ALB Cluster
 
-In this scenario the runner agent is running on a single EC2 node and runners are created by [docker machine](https://docs.gitlab.com/runner/configuration/autoscale.html) using spot instances. Runners will scale automatically based on configuration. The module creates by default a S3 cache that is shared cross runners (spot instances).
+In this scenario there multiple instances can be created.
 
 This examples shows:
 
+  - Creates an auto scaling group per instance
   - Usages of private VPC
-  - Provision an ALB and via.
-  - Creates a Route 53 record poiting to the ALB URL 
+  - Provision an AL
+  - Creates the DNS record
   - You can log into the instance via SSM (Session Manager).
   - You can also get the SSM key from a SSM parameter and connect via OpenVPN.
-
-![runners-default](https://github.com/npalm/assets/raw/master/images/terraform-aws-gitlab-runner/runner-default.png)
 
 ## Inputs
 
