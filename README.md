@@ -7,7 +7,6 @@ The following resources will be created:
 - Elastic File System (EFS)
 - Auto Scaling
 - Security groups for (ALB,EC2,EFS)
-- Web Application Firewall (WAF)
 - IAM roles and policies for the EC2 instances
 
 In addition you have the option to create or not :
