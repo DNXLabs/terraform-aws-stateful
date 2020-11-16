@@ -43,6 +43,6 @@ For deployment usage please see the `examples` folder.
 | userdata | Extra commands to pass to userdata | `string` | `""` | no |
 | vpc\_id | VPC ID to deploy the EC2/default cluster | `any` | n/a | yes |
 | lb\_type| Either ALB, NLB, or EIP to enable | `string` | `""` | no |
-| lb\_type| Either ALB, NLB, or EIP to enable | `number` | `0` | no |
-| lb\_protocol| LB protocol - TCP or UDP | `number` | `0` | no |
+| lb\_port| Port to be used in the security groups and in LB the health check | `number` | `0` | no |
+| lb\_protocol| LB protocol - TCP or UDP | `number` | `""` | no |
 | sg\_cidr\_blocks| LB protocol - TCP or UDP | `list` | `[]` | no |
