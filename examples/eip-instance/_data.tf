@@ -1,7 +1,7 @@
 data "aws_vpc" "selected" {
   filter {
     name   = "tag:Name"
-    values = ["${local.workspace["account_name"]}-VPC"]
+    values = ["${local.workspace["cluster_name"]}-VPC"]
   }
 }
 
@@ -33,12 +33,12 @@ data "aws_subnet_ids" "secure" {
 }
 
 data "aws_acm_certificate" "domain_host" {
-  domain   = "*.labs2.dnx.host"
+  domain   = "*.hosted.zone"
   statuses = ["ISSUED"]
 }
 
 data "aws_route53_zone" "selected" {
-  name = local.workspace["hosted_zone"]
+  name  = local.workspace["hosted_zone"]
 }
 
 data "aws_region" "current" {}

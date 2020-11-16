@@ -1,16 +1,16 @@
-resource "aws_efs_file_system" "stateful" {
-  creation_token = "stateful-${var.name}"
+resource "aws_efs_file_system" "default" {
+  creation_token = var.name
   encrypted      = true
 
   tags = {
-    Name = "stateful-${var.name}"
+    Name = "efs-${var.name}"
   }
 
 }
 
-resource "aws_efs_mount_target" "stateful" {
+resource "aws_efs_mount_target" "default" {
   count          = length(var.secure_subnet_ids)
-  file_system_id = aws_efs_file_system.stateful.id
+  file_system_id = aws_efs_file_system.default.id
   subnet_id      = var.secure_subnet_ids[count.index]
 
   security_groups = [
@@ -23,21 +23,21 @@ resource "aws_efs_mount_target" "stateful" {
 }
 
 resource "aws_security_group" "efs" {
-  name        = "stateful-efs-${var.name}"
-  description = "for EFS to talk to stateful cluster"
+  name        = "efs-${var.name}"
+  description = "for EFS to talk to default cluster"
   vpc_id      = var.vpc_id
 
   tags = {
-    Name = "stateful-efs-${var.name}"
+    Name = "efs-${var.name}"
   }
 }
 
-resource "aws_security_group_rule" "nfs_from_stateful_to_efs" {
-  description              = "stateful to EFS"
+resource "aws_security_group_rule" "nfs_from_node_to_efs" {
+  description              = "${var.name} to EFS"
   type                     = "ingress"
   from_port                = 2049
   to_port                  = 2049
   protocol                 = "tcp"
   security_group_id        = aws_security_group.efs.id
-  source_security_group_id = aws_security_group.stateful.id
+  source_security_group_id = aws_security_group.default.id
 }

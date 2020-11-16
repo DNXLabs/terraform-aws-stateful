@@ -6,11 +6,6 @@ echo "### INSTALL PACKAGES"
 yum update -y
 yum install -y amazon-efs-utils aws-cli httpd
 
-echo "### INSTALL SSM AGENT"
-cd /tmp
-yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
-systemctl restart amazon-ssm-agent
-
 echo "### SETUP EFS"
 
 EFS_DIR=${custom_efs_dir}
@@ -30,5 +25,7 @@ echo "### SETUP AGENT"
 echo "### SETUP APACHE"
 touch /var/www/html/index.html
 systemctl restart httpd
+
+${eip}
 
 ${userdata_extra}
