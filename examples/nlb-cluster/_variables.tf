@@ -12,8 +12,8 @@ locals {
       hostnames      = ["mydomain.hosted.zone"]
       custom_efs_dir = "/my-dir"
       instance_count = 1
-      lb_type        = "EIP"
-      lb_port        = 22
+      lb_type        = "NLB"
+      lb_port        = 22 ## any tcp port, if you choose an UDP port, also change the lb_protocol variable below
       lb_protocol    = "TCP"
       sg_cidr_blocks = ["0.0.0.0/0"]
     }

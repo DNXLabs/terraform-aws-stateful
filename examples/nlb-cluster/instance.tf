@@ -1,4 +1,4 @@
-module "cluster" {
+module "nlb_cluster" {
   source             = "./modules/terraform-aws-stateful/"
   name               = local.workspace["name"]
   cluster_name       = local.workspace["cluster_name"]

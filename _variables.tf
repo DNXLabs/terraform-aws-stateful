@@ -1,5 +1,9 @@
 variable "name" {
-  description = "Name of this EC2/stateful cluster"
+  description = "Name of this EC2 cluster"
+}
+
+variable "cluster_name" {
+  description = "Environment name"
 }
 
 variable "instance_type" {
@@ -12,13 +16,30 @@ variable "instance_count" {
   description = "Number of EC2 intances"
 }
 
-variable "enable_alb" {
-  type        = bool
-  default     = false
-  description = "Wheter to enable application load balancer"
+variable "lb_type" {
+  default     = ""
+  description = "Either alb nlb or EIP to enable"
+}
+
+variable "lb_port" {
+  type        = number
+  default     = 0
+  description = "LB port"
+}
+
+variable "lb_protocol" {
+  default     = ""
+  description = "LB protocol"
+}
+
+variable "sg_cidr_blocks" {
+  type        = list
+  default     = []
+  description = "Which cidr blocks allowed to connect to the service"
 }
 
 variable "certificate_arn" {
+  default     = ""
   description = "Certificate ARN to be used on the ALB"
 }
 
@@ -54,7 +75,7 @@ variable "secure_subnet_ids" {
 }
 
 variable "vpc_id" {
-  description = "VPC ID to deploy the EC2/stateful cluster"
+  description = "VPC ID to deploy the EC2/default cluster"
 }
 
 variable "security_group_ids" {
@@ -74,5 +95,6 @@ variable "hosted_zone" {
 }
 
 variable "hostnames" {
+  default     = []
   description = "Hostnames to be created on Route 53"
 }
