@@ -1,9 +1,5 @@
 variable "name" {
-  description = "Name of this EC2 cluster"
-}
-
-variable "cluster_name" {
-  description = "Environment name"
+  description = "Name of this EC2 Instance"
 }
 
 variable "instance_type" {
@@ -18,18 +14,24 @@ variable "instance_count" {
 
 variable "lb_type" {
   default     = ""
-  description = "Either alb nlb or EIP to enable"
+  description = "Either ALB, NLB or EIP to enable"
 }
 
-variable "lb_port" {
-  type        = number
-  default     = 0
-  description = "LB port"
+variable "lb_scheme" {
+  default     = "external"
+  description = "Wheter to use an external ALB/NLB or internal (not applicable for EIP)"
 }
 
-variable "lb_protocol" {
-  default     = ""
-  description = "LB protocol"
+variable "tcp_ports" {
+  type        = list
+  default     = []
+  description = "List TCP ports to listen (only when lb_type is NLB or EIP)"
+}
+
+variable "udp_ports" {
+  type        = list
+  default     = []
+  description = "List of UDP ports to listen (only when lb_type is NLB or EIP)"
 }
 
 variable "sg_cidr_blocks" {
@@ -53,24 +55,35 @@ variable "instance_volume_size_root" {
   description = "Volume root size"
 }
 
+variable "fs_type" {
+  default     = "EFS"
+  description = "Filesystem persistency to use: EFS or EBS"
+}
+
 variable "custom_efs_dir" {
   default     = ""
   description = "Custom EFS mount point - e.g /home"
 }
 
-variable "instances_subnet" {
-  type        = list
-  description = "List of private subnet IDs for EC2 instances"
+variable "ebs_size" {
+  default     = 40
+  description = "Size of EBS volumes in GB"
 }
 
-variable "public_subnet_ids" {
+variable "instances_subnet_ids" {
+  type        = list
+  description = "List of private subnet IDs for EC2 instances (same number as instance_count)"
+}
+
+variable "lb_subnet_ids" {
   type        = list
   default     = []
-  description = "List of public subnet IDs for the ALB"
+  description = "List of subnet IDs for the ALB/NLB"
 }
 
-variable "secure_subnet_ids" {
+variable "efs_subnet_ids" {
   type        = list
+  default     = []
   description = "List of secure subnet IDs for EFS"
 }
 
@@ -97,4 +110,9 @@ variable "hosted_zone" {
 variable "hostnames" {
   default     = []
   description = "Hostnames to be created on Route 53"
+}
+
+variable "ami_id" {
+  default     = ""
+  description = "AMI to use (leave blank to use latest Amazon Linux 2)"
 }

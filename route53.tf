@@ -31,6 +31,4 @@ resource "aws_route53_record" "eip_hostname" {
   type    = "A"
   ttl     = "300"
   records = aws_eip.default.*.public_ip
-
-  depends_on = [aws_eip.default]
 }
