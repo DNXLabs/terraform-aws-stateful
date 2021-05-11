@@ -1,6 +1,9 @@
 
 echo "### SETUP EFS"
 
+yum update -y
+yum install -y amazon-efs-utils
+
 EFS_DIR=${efs_mount_dir}
 
 if [ -z "$${EFS_DIR}" ]; then
