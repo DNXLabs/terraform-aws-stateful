@@ -18,12 +18,14 @@ locals {
   )
   template_efs = templatefile("${path.module}/userdata-efs.tpl", 
     { 
-      custom_efs_dir = var.custom_efs_dir
-      tf_efs_id      = try(aws_efs_file_system.default[0].id, "")
+      efs_mount_dir = var.efs_mount_dir
+      efs_id     = try(aws_efs_file_system.default[0].id, "")
     }
   )
   template_ebs = templatefile("${path.module}/userdata-ebs.tpl", 
     { 
+      ebs_mount_dir = var.ebs_mount_dir
+      ebs_id        = try(aws_ebs_volume.default[0].id, "")
     }
   )
 }
@@ -35,14 +37,6 @@ resource "aws_launch_template" "default" {
 
   iam_instance_profile {
     name = aws_iam_instance_profile.default.name
-  }
-
-  block_device_mappings {
-    device_name = "/dev/sda1"
-
-    ebs {
-      volume_size = var.instance_volume_size_root
-    }
   }
 
   key_name = aws_key_pair.default.id

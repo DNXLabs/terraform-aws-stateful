@@ -50,24 +50,39 @@ variable "userdata" {
   description = "Extra commands to pass to userdata"
 }
 
-variable "instance_volume_size_root" {
-  default     = 16
-  description = "Volume root size"
-}
-
 variable "fs_type" {
   default     = "EFS"
   description = "Filesystem persistency to use: EFS or EBS"
 }
 
-variable "custom_efs_dir" {
-  default     = ""
+variable "efs_mount_dir" {
+  default     = "/mnt/efs"
   description = "Custom EFS mount point - e.g /home"
 }
 
 variable "ebs_size" {
   default     = 40
   description = "Size of EBS volumes in GB"
+}
+
+variable "ebs_encrypted" {
+  default     = true
+  description = "Encrypts EBS volume"
+}
+
+variable "ebs_kms_key_id" {
+  default     = ""
+  description = "Encrypts EBS volume with custom KMS key (requires ebs_encrypted=true)"
+}
+
+variable "ebs_type" {
+  default     = "gp2"
+  description = "EBS volume type"
+}
+
+variable "ebs_mount_dir" {
+  default = "/mnt/ebs"
+  description = "Custom EBS mount point - e.g /home"
 }
 
 variable "instances_subnet_ids" {

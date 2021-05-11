@@ -19,7 +19,7 @@ data "aws_vpc" "current" {
   id = var.vpc_id
 }
 
-# data "aws_subnet" "current" {
-#   for_each = var.instances_subnet_ids
-#   id       = each.value
-# }
+data "aws_subnet" "instances" {
+  count = length(var.instances_subnet_ids)
+  id    = var.instances_subnet_ids[count.index]
+}

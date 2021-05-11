@@ -21,6 +21,21 @@ resource "aws_iam_role" "default" {
   ]
 }
 EOF
+
+  inline_policy {
+    name = "ebs-attach-volume"
+
+    policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action   = ["ec2:AttachVolume", "ec2:DetachVolume"]
+          Effect   = "Allow"
+          Resource = compact([try(aws_ebs_volume.default[0].arn, ""), "arn:aws:ec2:*:*:instance/*"])
+        },
+      ]
+    })
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "default_ssm" {
