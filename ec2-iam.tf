@@ -29,9 +29,14 @@ EOF
       Version = "2012-10-17"
       Statement = [
         {
-          Action   = ["ec2:AttachVolume", "ec2:DetachVolume"]
+          Action   = ["ec2:AttachVolume", "ec2:DetachVolume", "ec2:DescribeVolumeStatus"]
           Effect   = "Allow"
           Resource = compact([try(aws_ebs_volume.default[0].arn, ""), "arn:aws:ec2:*:*:instance/*"])
+        },
+        {
+          Action   = ["ec2:DescribeVolumes"]
+          Effect   = "Allow"
+          Resource = ["*"]
         },
       ]
     })

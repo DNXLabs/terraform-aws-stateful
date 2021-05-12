@@ -14,7 +14,7 @@ AZ="`wget -q -O - http://169.254.169.254/latest/meta-data/placement/availability
 AWS_REGION="`echo \"$AZ\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
 
 aws ec2 attach-volume --region $${AWS_REGION} --volume-id $${EBS_ID} --instance-id $${INSTANCE_ID} --device /dev/sdf
-aws ec2 wait volume-in-use --volume-ids $${EBS_ID}
+aws ec2 wait --region $${AWS_REGION} volume-in-use --volume-ids $${EBS_ID}
 
 VOLUME=/dev/nvme1n1
 
