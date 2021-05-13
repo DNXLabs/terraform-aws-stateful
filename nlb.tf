@@ -12,7 +12,7 @@ resource "aws_lb" "nlb" {
 
 resource "aws_lb_target_group" "nlb_tg_udp" {
   count    = var.lb_type == "NLB" ? length(var.udp_ports) : 0
-  name     = "tg-${var.name}-udp-${count.index}"
+  name     = "tg-${var.name}-udp-${var.udp_ports[count.index]}"
   port     = var.udp_ports[count.index]
   protocol = "UDP"
   vpc_id   = var.vpc_id
@@ -20,7 +20,7 @@ resource "aws_lb_target_group" "nlb_tg_udp" {
 
 resource "aws_lb_target_group" "nlb_tg_tcp" {
   count    = var.lb_type == "NLB" ? length(var.tcp_ports) : 0
-  name     = "tg-${var.name}-tcp-${count.index}"
+  name     = "tg-${var.name}-tcp-${var.udp_ports[count.index]}"
   port     = var.tcp_ports[count.index]
   protocol = "TCP"
   vpc_id   = var.vpc_id
