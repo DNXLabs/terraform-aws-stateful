@@ -1,7 +1,7 @@
 data "aws_vpc" "selected" {
   filter {
     name   = "tag:Name"
-    values = ["${local.workspace["cluster_name"]}-VPC"]
+    values = ["${local.workspace["environment_name"]}-VPC"]
   }
 }
 
