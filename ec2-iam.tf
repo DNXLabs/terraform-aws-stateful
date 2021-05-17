@@ -41,6 +41,21 @@ EOF
       ]
     })
   }
+
+  inline_policy {
+    name = "cloudwatch"
+
+    policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action   = ["logs:CreateLogStream", "logs:DescribeLogStreams", "logs:PutLogEvents", "cloudwatch:PutMetricData"]
+          Effect   = "Allow"
+          Resource = ["*"]
+        }
+      ]
+    })
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "default_ssm" {

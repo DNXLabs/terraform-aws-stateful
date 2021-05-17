@@ -6,6 +6,7 @@ data "template_file" "userdata" {
     eip            = var.lb_type == "EIP" ? local.template_eip : ""
     efs            = var.fs_type == "EFS" ? local.template_efs : ""
     ebs            = var.fs_type == "EBS" ? local.template_ebs : ""
+    cwlogs         = length(var.cwlog_files) > 0 ? local.template_cwlogs : ""
   }
 }
 
@@ -26,6 +27,12 @@ locals {
     { 
       ebs_mount_dir = var.ebs_mount_dir
       ebs_id        = try(aws_ebs_volume.default[0].id, "")
+    }
+  )
+  template_cwlogs = templatefile("${path.module}/userdata-cwlogs.tpl", 
+    { 
+      log_files = var.cwlog_files
+      name      = var.name
     }
   )
 }

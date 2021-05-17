@@ -8,4 +8,6 @@ ${eip}
 
 ${ebs}
 
+${cwlogs}
+
 ${userdata_extra}

@@ -131,3 +131,14 @@ variable "ami_id" {
   default     = ""
   description = "AMI to use (leave blank to use latest Amazon Linux 2)"
 }
+
+variable "cwlog_files" {
+  default = []
+  description = "List of log files to stream to cloudwatch logs (leave empty to disable the agent) - only for Amazon Linux 2 AMIs"
+}
+
+variable "tags" {
+  default     = {}
+  description = "Additional resource tags"
+  type        = map(string)
+}
