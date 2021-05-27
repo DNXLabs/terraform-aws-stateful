@@ -20,5 +20,7 @@ resource "aws_autoscaling_group" "asg" {
     create_before_destroy = true
   }
 
+  
+
   depends_on = [aws_efs_file_system.default]
 }
