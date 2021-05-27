@@ -142,3 +142,13 @@ variable "tags" {
   description = "Additional resource tags"
   type        = map(string)
 }
+
+variable "on_demand_base_capacity" {
+  description = "on_demand_base_capacity"
+  default     = ""
+}
+
+variable "on_demand_percentage" {
+  description = "on_demand_percentage"
+  default     = ""
+}
