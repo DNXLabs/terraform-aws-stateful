@@ -4,7 +4,14 @@ resource "aws_autoscaling_group" "asg" {
   min_size            = 1
   max_size            = 1
   vpc_zone_identifier = list(var.instances_subnet_ids[count.index])
-mixed_instances_policy { 
+
+
+  # launch_template {
+  #   name    = aws_launch_template.default.name
+  #   version = "$Latest"
+  # }
+
+  mixed_instances_policy { 
 
     launch_template {
       launch_template_specification {
@@ -14,10 +21,11 @@ mixed_instances_policy {
     }
     instances_distribution {
     
-      on_demand_base_capacity                  = var.on_demand_base_capacity
-      on_demand_percentage_above_base_capacity = var.on_demand_percentage
+      on_demand_base_capacity                  = 0
+      on_demand_percentage_above_base_capacity = 0
     }
 
+}
   tags = concat(
     [ for key, value in var.tags: { key: key, value: value, propagate_at_launch: true } ],
     [{
