@@ -21,8 +21,8 @@ resource "aws_autoscaling_group" "asg" {
     }
     instances_distribution {
     
-      on_demand_base_capacity                  = 0
-      on_demand_percentage_above_base_capacity = 0
+      on_demand_base_capacity                  = var.on_demand_base_capacity
+      on_demand_percentage_above_base_capacity = var.on_demand_percentage
     }
 
 }
