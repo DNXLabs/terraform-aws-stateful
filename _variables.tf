@@ -145,10 +145,10 @@ variable "tags" {
 
 variable "on_demand_base_capacity" {
   description = "on_demand_base_capacity"
-  default     = ""
+  default     = 0
 }
 
 variable "on_demand_percentage" {
   description = "on_demand_percentage"
-  default     = ""
+  default     = 0
 }
