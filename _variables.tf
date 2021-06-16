@@ -7,6 +7,17 @@ variable "instance_type" {
   description = "EC2 instance type"
 }
 
+variable "on_demand_base_capacity" {
+  description = "on_demand_base_capacity"
+  default     = ""
+}
+
+variable "on_demand_percentage" {
+  description = "on_demand_percentage"
+  default     = ""
+}
+
+
 variable "instance_count" {
   default     = 1
   description = "Number of EC2 intances"
