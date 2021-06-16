@@ -158,8 +158,3 @@ variable "on_demand_base_capacity" {
   description = "on_demand_base_capacity"
   default     = 0
 }
-
-variable "on_demand_percentage" {
-  description = "on_demand_percentage"
-  default     = 0
-}
