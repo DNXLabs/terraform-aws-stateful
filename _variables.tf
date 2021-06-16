@@ -1,9 +1,5 @@
 variable "name" {
-  description = "Name of this EC2 cluster"
-}
-
-variable "cluster_name" {
-  description = "Environment name"
+  description = "Name of this EC2 Instance"
 }
 
 variable "instance_type" {
@@ -29,18 +25,24 @@ variable "instance_count" {
 
 variable "lb_type" {
   default     = ""
-  description = "Either alb nlb or EIP to enable"
+  description = "Either ALB, NLB or EIP to enable"
 }
 
-variable "lb_port" {
-  type        = number
-  default     = 0
-  description = "LB port"
+variable "lb_scheme" {
+  default     = "external"
+  description = "Wheter to use an external ALB/NLB or internal (not applicable for EIP)"
 }
 
-variable "lb_protocol" {
-  default     = ""
-  description = "LB protocol"
+variable "tcp_ports" {
+  type        = list
+  default     = []
+  description = "List TCP ports to listen (only when lb_type is NLB or EIP)"
+}
+
+variable "udp_ports" {
+  type        = list
+  default     = []
+  description = "List of UDP ports to listen (only when lb_type is NLB or EIP)"
 }
 
 variable "sg_cidr_blocks" {
@@ -59,29 +61,55 @@ variable "userdata" {
   description = "Extra commands to pass to userdata"
 }
 
-variable "instance_volume_size_root" {
-  default     = 16
-  description = "Volume root size"
+variable "fs_type" {
+  default     = "EFS"
+  description = "Filesystem persistency to use: EFS or EBS"
 }
 
-variable "custom_efs_dir" {
-  default     = ""
+variable "efs_mount_dir" {
+  default     = "/mnt/efs"
   description = "Custom EFS mount point - e.g /home"
 }
 
-variable "instances_subnet" {
-  type        = list
-  description = "List of private subnet IDs for EC2 instances"
+variable "ebs_size" {
+  default     = 40
+  description = "Size of EBS volumes in GB"
 }
 
-variable "public_subnet_ids" {
+variable "ebs_encrypted" {
+  default     = true
+  description = "Encrypts EBS volume"
+}
+
+variable "ebs_kms_key_id" {
+  default     = ""
+  description = "Encrypts EBS volume with custom KMS key (requires ebs_encrypted=true)"
+}
+
+variable "ebs_type" {
+  default     = "gp2"
+  description = "EBS volume type"
+}
+
+variable "ebs_mount_dir" {
+  default = "/mnt/ebs"
+  description = "Custom EBS mount point - e.g /home"
+}
+
+variable "instances_subnet_ids" {
+  type        = list
+  description = "List of private subnet IDs for EC2 instances (same number as instance_count)"
+}
+
+variable "lb_subnet_ids" {
   type        = list
   default     = []
-  description = "List of public subnet IDs for the ALB"
+  description = "List of subnet IDs for the ALB/NLB"
 }
 
-variable "secure_subnet_ids" {
+variable "efs_subnet_ids" {
   type        = list
+  default     = []
   description = "List of secure subnet IDs for EFS"
 }
 
@@ -108,4 +136,30 @@ variable "hosted_zone" {
 variable "hostnames" {
   default     = []
   description = "Hostnames to be created on Route 53"
+}
+
+variable "ami_id" {
+  default     = ""
+  description = "AMI to use (leave blank to use latest Amazon Linux 2)"
+}
+
+variable "cwlog_files" {
+  default = []
+  description = "List of log files to stream to cloudwatch logs (leave empty to disable the agent) - only for Amazon Linux 2 AMIs"
+}
+
+variable "tags" {
+  default     = {}
+  description = "Additional resource tags"
+  type        = map(string)
+}
+
+variable "on_demand_base_capacity" {
+  description = "on_demand_base_capacity"
+  default     = 0
+}
+
+variable "on_demand_percentage" {
+  description = "on_demand_percentage"
+  default     = 0
 }

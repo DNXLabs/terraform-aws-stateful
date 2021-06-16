@@ -15,14 +15,11 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 
-data "aws_autoscaling_groups" "groups" {
-  filter {
-    name   = "key"
-    values = ["Name"]
-  }
+data "aws_vpc" "current" {
+  id = var.vpc_id
+}
 
-  filter {
-    name   = "value"
-    values = ["${var.name}-*"]
-  }
+data "aws_subnet" "instances" {
+  count = length(var.instances_subnet_ids)
+  id    = var.instances_subnet_ids[count.index]
 }

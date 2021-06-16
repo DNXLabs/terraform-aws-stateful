@@ -36,7 +36,7 @@ For deployment usage please see the `examples` folder.
 | instance\_volume\_size\_root | Volume root size | `number` | `16` | no |
 | instances\_subnet | List of private subnet IDs for EC2 instances | `list` | n/a | yes |
 | name | Name of this EC2/default cluster | `any` | n/a | yes |
-| cluster_name | Name of the environment (dev/prod) | `any` | n/a | yes |
+| environment_name | Name of the environment (dev/prod) | `any` | n/a | yes |
 | public\_subnet\_ids | List of public subnet IDs for the ALB | `list` | `[]` | no |
 | secure\_subnet\_ids | List of secure subnet IDs for EFS | `list` | n/a | yes |
 | security\_group\_ids | Extra security groups for instances | `list` | `[]` | no |
