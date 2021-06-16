@@ -9,14 +9,13 @@ variable "instance_type" {
 
 variable "on_demand_base_capacity" {
   description = "on_demand_base_capacity"
-  default     = ""
+  default     = 0
 }
 
 variable "on_demand_percentage" {
   description = "on_demand_percentage"
   default     = ""
 }
-
 
 variable "instance_count" {
   default     = 1
@@ -152,9 +151,4 @@ variable "tags" {
   default     = {}
   description = "Additional resource tags"
   type        = map(string)
-}
-
-variable "on_demand_base_capacity" {
-  description = "on_demand_base_capacity"
-  default     = 0
 }
