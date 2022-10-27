@@ -1,4 +1,7 @@
-# terraform-aws-stateful
+# terraform-aws-template
+
+[![Lint Status](https://github.com/DNXLabs/terraform-aws-template/workflows/Lint/badge.svg)](https://github.com/DNXLabs/terraform-aws-template/actions)
+[![LICENSE](https://img.shields.io/github/license/DNXLabs/terraform-aws-template)](https://github.com/DNXLabs/terraform-aws-template/blob/master/LICENSE)
 
 This terraform module creates an EC2 Cluster on AWS.
 
@@ -17,6 +20,7 @@ In addition, you have the option to create:
  - Route 53 (requires ALB)
      - URL pointing to a hostname (NLB or ALB hostname)
 
+<!--- BEGIN_TF_DOCS --->
 ## Usage
 
 For deployment usage please see the `examples` folder.
@@ -46,3 +50,13 @@ For deployment usage please see the `examples` folder.
 | lb\_port| Port to be used in the security groups and in LB the health check | `number` | `0` | no |
 | lb\_protocol| LB protocol - TCP or UDP | `number` | `""` | no |
 | sg\_cidr\_blocks| LB protocol - TCP or UDP | `list` | `[]` | no |
+
+<!--- END_TF_DOCS --->
+
+## Authors
+
+Module managed by [DNX Solutions](https://github.com/DNXLabs).
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/DNXLabs/terraform-aws-template/blob/master/LICENSE) for full details.
