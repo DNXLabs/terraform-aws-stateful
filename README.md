@@ -21,35 +21,57 @@ In addition, you have the option to create:
      - URL pointing to a hostname (NLB or ALB hostname)
 
 <!--- BEGIN_TF_DOCS --->
-## Usage
 
-For deployment usage please see the `examples` folder.
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+| template | n/a |
+| tls | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| certificate\_arn | Certificate ARN to be used on the ALB | `any` | n/a | no |
-| custom\_efs\_dir | Custom EFS mount point - e.g /home | `string` | `""` | no |
-| enable\_alb | Wheter to enable application load balancer | `bool` | `false` | no |
+| ami\_id | AMI to use (leave blank to use latest Amazon Linux 2) | `string` | `""` | no |
+| certificate\_arn | Certificate ARN to be used on the ALB | `string` | `""` | no |
+| cwlog\_files | List of log files to stream to cloudwatch logs (leave empty to disable the agent) - only for Amazon Linux 2 AMIs | `list` | `[]` | no |
+| ebs\_encrypted | Encrypts EBS volume | `bool` | `true` | no |
+| ebs\_kms\_key\_id | Encrypts EBS volume with custom KMS key (requires ebs\_encrypted=true) | `string` | `""` | no |
+| ebs\_mount\_dir | Custom EBS mount point - e.g /home | `string` | `"/mnt/ebs"` | no |
+| ebs\_size | Size of EBS volumes in GB | `number` | `40` | no |
+| ebs\_type | EBS volume type | `string` | `"gp2"` | no |
+| efs\_mount\_dir | Custom EFS mount point - e.g /home | `string` | `"/mnt/efs"` | no |
+| efs\_subnet\_ids | List of secure subnet IDs for EFS | `list` | `[]` | no |
+| fs\_type | Filesystem persistency to use: EFS or EBS | `string` | `"EFS"` | no |
 | hosted\_zone | Route 53 hosted zone | `string` | `""` | no |
 | hostname\_create | Wheter to create the hostnames on Route 53 | `bool` | `false` | no |
-| hostnames | Hostnames to be created on Route 53 | `any` | n/a | no |
+| hostnames | Hostnames to be created on Route 53 | `list` | `[]` | no |
 | instance\_count | Number of EC2 intances | `number` | `1` | no |
 | instance\_type | EC2 instance type | `string` | `"t2.micro"` | no |
-| instance\_volume\_size\_root | Volume root size | `number` | `16` | no |
-| instances\_subnet | List of private subnet IDs for EC2 instances | `list` | n/a | yes |
-| name | Name of this EC2/default cluster | `any` | n/a | yes |
-| environment_name | Name of the environment (dev/prod) | `any` | n/a | yes |
-| public\_subnet\_ids | List of public subnet IDs for the ALB | `list` | `[]` | no |
-| secure\_subnet\_ids | List of secure subnet IDs for EFS | `list` | n/a | yes |
+| instances\_subnet\_ids | List of private subnet IDs for EC2 instances (same number as instance\_count) | `list` | n/a | yes |
+| lb\_scheme | Wheter to use an external ALB/NLB or internal (not applicable for EIP) | `string` | `"external"` | no |
+| lb\_subnet\_ids | List of subnet IDs for the ALB/NLB | `list` | `[]` | no |
+| lb\_type | Either ALB, NLB or EIP to enable | `string` | `""` | no |
+| name | Name of this EC2 Instance | `any` | n/a | yes |
+| on\_demand\_base\_capacity | on\_demand\_base\_capacity | `number` | `0` | no |
+| on\_demand\_percentage | on\_demand\_percentage | `string` | `""` | no |
 | security\_group\_ids | Extra security groups for instances | `list` | `[]` | no |
+| sg\_cidr\_blocks | Which cidr blocks allowed to connect to the service | `list` | `[]` | no |
+| tags | Additional resource tags | `map(string)` | `{}` | no |
+| tcp\_ports | List TCP ports to listen (only when lb\_type is NLB or EIP) | `list` | `[]` | no |
+| udp\_ports | List of UDP ports to listen (only when lb\_type is NLB or EIP) | `list` | `[]` | no |
 | userdata | Extra commands to pass to userdata | `string` | `""` | no |
 | vpc\_id | VPC ID to deploy the EC2/default cluster | `any` | n/a | yes |
-| lb\_type| Either ALB, NLB, or EIP to enable | `string` | `""` | no |
-| lb\_port| Port to be used in the security groups and in LB the health check | `number` | `0` | no |
-| lb\_protocol| LB protocol - TCP or UDP | `number` | `""` | no |
-| sg\_cidr\_blocks| LB protocol - TCP or UDP | `list` | `[]` | no |
+
+## Outputs
+
+No output.
 
 <!--- END_TF_DOCS --->
 
