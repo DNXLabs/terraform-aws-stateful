@@ -24,14 +24,15 @@ In addition, you have the option to create:
 
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | aws | n/a |
-| template | n/a |
 | tls | n/a |
 
 ## Inputs
