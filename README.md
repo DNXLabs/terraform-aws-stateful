@@ -60,7 +60,7 @@ No requirements.
 | lb\_type | Either ALB, NLB or EIP to enable | `string` | `""` | no |
 | name | Name of this EC2 Instance | `any` | n/a | yes |
 | on\_demand\_base\_capacity | on\_demand\_base\_capacity | `number` | `0` | no |
-| on\_demand\_percentage | on\_demand\_percentage | `string` | `""` | no |
+| on\_demand\_percentage | on\_demand\_percentage | `number` | `0` | no |
 | security\_group\_ids | Extra security groups for instances | `list` | `[]` | no |
 | sg\_cidr\_blocks | Which cidr blocks allowed to connect to the service | `list` | `[]` | no |
 | tags | Additional resource tags | `map(string)` | `{}` | no |
