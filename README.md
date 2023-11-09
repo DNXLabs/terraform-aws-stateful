@@ -47,25 +47,25 @@ No requirements.
 | ebs\_size | Size of EBS volumes in GB | `number` | `40` | no |
 | ebs\_type | EBS volume type | `string` | `"gp2"` | no |
 | efs\_mount\_dir | Custom EFS mount point - e.g /home | `string` | `"/mnt/efs"` | no |
-| efs\_subnet\_ids | List of secure subnet IDs for EFS | `list` | `[]` | no |
+| efs\_subnet\_ids | List of secure subnet IDs for EFS | `list(any)` | `[]` | no |
 | fs\_type | Filesystem persistency to use: EFS or EBS | `string` | `"EFS"` | no |
 | hosted\_zone | Route 53 hosted zone | `string` | `""` | no |
 | hostname\_create | Wheter to create the hostnames on Route 53 | `bool` | `false` | no |
 | hostnames | Hostnames to be created on Route 53 | `list` | `[]` | no |
 | instance\_count | Number of EC2 intances | `number` | `1` | no |
 | instance\_type | EC2 instance type | `string` | `"t2.micro"` | no |
-| instances\_subnet\_ids | List of private subnet IDs for EC2 instances (same number as instance\_count) | `list` | n/a | yes |
+| instances\_subnet\_ids | List of private subnet IDs for EC2 instances (same number as instance\_count) | `list(any)` | n/a | yes |
 | lb\_scheme | Wheter to use an external ALB/NLB or internal (not applicable for EIP) | `string` | `"external"` | no |
-| lb\_subnet\_ids | List of subnet IDs for the ALB/NLB | `list` | `[]` | no |
+| lb\_subnet\_ids | List of subnet IDs for the ALB/NLB | `list(any)` | `[]` | no |
 | lb\_type | Either ALB, NLB or EIP to enable | `string` | `""` | no |
 | name | Name of this EC2 Instance | `any` | n/a | yes |
 | on\_demand\_base\_capacity | on\_demand\_base\_capacity | `number` | `0` | no |
 | on\_demand\_percentage | on\_demand\_percentage | `number` | `0` | no |
-| security\_group\_ids | Extra security groups for instances | `list` | `[]` | no |
-| sg\_cidr\_blocks | Which cidr blocks allowed to connect to the service | `list` | `[]` | no |
+| security\_group\_ids | Extra security groups for instances | `list(any)` | `[]` | no |
+| sg\_cidr\_blocks | Which cidr blocks allowed to connect to the service | `list(any)` | `[]` | no |
 | tags | Additional resource tags | `map(string)` | `{}` | no |
-| tcp\_ports | List TCP ports to listen (only when lb\_type is NLB or EIP) | `list` | `[]` | no |
-| udp\_ports | List of UDP ports to listen (only when lb\_type is NLB or EIP) | `list` | `[]` | no |
+| tcp\_ports | List TCP ports to listen (only when lb\_type is NLB or EIP) | `list(any)` | `[]` | no |
+| udp\_ports | List of UDP ports to listen (only when lb\_type is NLB or EIP) | `list(any)` | `[]` | no |
 | userdata | Extra commands to pass to userdata | `string` | `""` | no |
 | vpc\_id | VPC ID to deploy the EC2/default cluster | `any` | n/a | yes |
 
