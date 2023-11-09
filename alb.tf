@@ -58,6 +58,6 @@ resource "aws_lb_listener" "alb_https_listener" {
 resource "aws_autoscaling_attachment" "alb_asg_attachment" {
   count                  = (var.lb_type == "ALB" ? 1 : 0) * var.instance_count
   autoscaling_group_name = aws_autoscaling_group.asg[count.index].name
-  alb_target_group_arn   = aws_lb_target_group.alb_tg[0].arn
+  lb_target_group_arn    = aws_lb_target_group.alb_tg[0].arn
   depends_on             = [aws_lb_target_group.alb_tg]
 }
