@@ -14,7 +14,7 @@ variable "on_demand_base_capacity" {
 
 variable "on_demand_percentage" {
   description = "on_demand_percentage"
-  default     = ""
+  default     = 0
 }
 
 variable "instance_count" {
@@ -91,7 +91,7 @@ variable "ebs_type" {
 }
 
 variable "ebs_mount_dir" {
-  default = "/mnt/ebs"
+  default     = "/mnt/ebs"
   description = "Custom EBS mount point - e.g /home"
 }
 
@@ -143,7 +143,7 @@ variable "ami_id" {
 }
 
 variable "cwlog_files" {
-  default = []
+  default     = []
   description = "List of log files to stream to cloudwatch logs (leave empty to disable the agent) - only for Amazon Linux 2 AMIs"
 }
 

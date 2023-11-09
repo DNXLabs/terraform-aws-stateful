@@ -11,26 +11,26 @@ data "template_file" "userdata" {
 }
 
 locals {
-  template_eip = templatefile("${path.module}/userdata-eip.tpl", 
-    { 
-      region = data.aws_region.current.id, 
-      eip_id = tostring(try(aws_eip.default[0].id, "")) 
+  template_eip = templatefile("${path.module}/userdata-eip.tpl",
+    {
+      region = data.aws_region.current.id,
+      eip_id = tostring(try(aws_eip.default[0].id, ""))
     }
   )
-  template_efs = templatefile("${path.module}/userdata-efs.tpl", 
-    { 
+  template_efs = templatefile("${path.module}/userdata-efs.tpl",
+    {
       efs_mount_dir = var.efs_mount_dir
-      efs_id     = try(aws_efs_file_system.default[0].id, "")
+      efs_id        = try(aws_efs_file_system.default[0].id, "")
     }
   )
-  template_ebs = templatefile("${path.module}/userdata-ebs.tpl", 
-    { 
+  template_ebs = templatefile("${path.module}/userdata-ebs.tpl",
+    {
       ebs_mount_dir = var.ebs_mount_dir
       ebs_id        = try(aws_ebs_volume.default[0].id, "")
     }
   )
-  template_cwlogs = templatefile("${path.module}/userdata-cwlogs.tpl", 
-    { 
+  template_cwlogs = templatefile("${path.module}/userdata-cwlogs.tpl",
+    {
       log_files = var.cwlog_files
       name      = var.name
     }
@@ -38,24 +38,37 @@ locals {
 }
 
 resource "aws_launch_template" "default" {
-  name_prefix   = "${var.name}-"
-  image_id      = var.ami_id != "" ? var.ami_id : data.aws_ami.amazon-linux-2.image_id
-  instance_type = var.instance_type
+  name_prefix = var.name
+  image_id    = var.ami_id != "" ? var.ami_id : data.aws_ami.amazon-linux-2.image_id
+  /* instance_type          = var.instance_type */
+  vpc_security_group_ids = concat([aws_security_group.default.id], var.security_group_ids)
+  user_data              = base64encode(data.template_file.userdata.rendered)
+  key_name               = aws_key_pair.default.id
 
   iam_instance_profile {
-    name = aws_iam_instance_profile.default.name
+    arn = aws_iam_instance_profile.default.arn
   }
 
-  key_name = aws_key_pair.default.id
 
-  vpc_security_group_ids = concat(list(aws_security_group.default.id), var.security_group_ids)
+  block_device_mappings {
+    device_name = "/dev/sda1"
 
-  user_data = base64encode(data.template_file.userdata.rendered)
+    ebs {
+      volume_size           = var.ebs_size
+      delete_on_termination = true
+      volume_type           = "gp2"
+      encrypted             = false
+    }
+  }
 
   lifecycle {
     create_before_destroy = true
   }
 }
+
+
+
+
 
 resource "tls_private_key" "default" {
   algorithm = "RSA"
