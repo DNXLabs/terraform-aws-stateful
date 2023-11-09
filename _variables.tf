@@ -33,19 +33,19 @@ variable "lb_scheme" {
 }
 
 variable "tcp_ports" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "List TCP ports to listen (only when lb_type is NLB or EIP)"
 }
 
 variable "udp_ports" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "List of UDP ports to listen (only when lb_type is NLB or EIP)"
 }
 
 variable "sg_cidr_blocks" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "Which cidr blocks allowed to connect to the service"
 }
@@ -96,18 +96,18 @@ variable "ebs_mount_dir" {
 }
 
 variable "instances_subnet_ids" {
-  type        = list
+  type        = list(any)
   description = "List of private subnet IDs for EC2 instances (same number as instance_count)"
 }
 
 variable "lb_subnet_ids" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "List of subnet IDs for the ALB/NLB"
 }
 
 variable "efs_subnet_ids" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "List of secure subnet IDs for EFS"
 }
@@ -117,7 +117,7 @@ variable "vpc_id" {
 }
 
 variable "security_group_ids" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "Extra security groups for instances"
 }

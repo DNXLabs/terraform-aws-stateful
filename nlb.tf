@@ -53,11 +53,11 @@ resource "aws_lb_listener" "nlb_listener_tcp" {
 resource "aws_autoscaling_attachment" "nlb_asg_attachment_udp" {
   count                  = var.lb_type == "NLB" ? (length(aws_autoscaling_group.asg) * length(var.udp_ports)) : 0
   autoscaling_group_name = aws_autoscaling_group.asg[floor(count.index / length(var.udp_ports))].name
-  alb_target_group_arn   = aws_lb_target_group.nlb_tg_udp[count.index % length(var.udp_ports)].arn
+  lb_target_group_arn    = aws_lb_target_group.nlb_tg_udp[count.index % length(var.udp_ports)].arn
 }
 
 resource "aws_autoscaling_attachment" "nlb_asg_attachment_tcp" {
   count                  = var.lb_type == "NLB" ? (length(aws_autoscaling_group.asg) * length(var.tcp_ports)) : 0
   autoscaling_group_name = aws_autoscaling_group.asg[floor(count.index / length(var.tcp_ports))].name
-  alb_target_group_arn   = aws_lb_target_group.nlb_tg_tcp[count.index % length(var.tcp_ports)].arn
+  lb_target_group_arn    = aws_lb_target_group.nlb_tg_tcp[count.index % length(var.tcp_ports)].arn
 }

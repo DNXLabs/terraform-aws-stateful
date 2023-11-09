@@ -1,16 +1,15 @@
-data "template_file" "userdata" {
-  template = file("${path.module}/userdata.tpl")
 
-  vars = {
-    userdata_extra = var.userdata
-    eip            = var.lb_type == "EIP" ? local.template_eip : ""
-    efs            = var.fs_type == "EFS" ? local.template_efs : ""
-    ebs            = var.fs_type == "EBS" ? local.template_ebs : ""
-    cwlogs         = length(var.cwlog_files) > 0 ? local.template_cwlogs : ""
-  }
-}
 
 locals {
+  userdata = templatefile("${path.module}/userdata.tpl",
+    {
+      userdata_extra = var.userdata
+      eip            = var.lb_type == "EIP" ? local.template_eip : ""
+      efs            = var.fs_type == "EFS" ? local.template_efs : ""
+      ebs            = var.fs_type == "EBS" ? local.template_ebs : ""
+      cwlogs         = length(var.cwlog_files) > 0 ? local.template_cwlogs : ""
+    }
+  )
   template_eip = templatefile("${path.module}/userdata-eip.tpl",
     {
       region = data.aws_region.current.id,
@@ -38,11 +37,11 @@ locals {
 }
 
 resource "aws_launch_template" "default" {
-  name_prefix = var.name
-  image_id    = var.ami_id != "" ? var.ami_id : data.aws_ami.amazon-linux-2.image_id
-  /* instance_type          = var.instance_type */
+  name_prefix            = var.name
+  image_id               = var.ami_id != "" ? var.ami_id : data.aws_ami.amazon-linux-2.image_id
+  instance_type          = var.instance_type
   vpc_security_group_ids = concat([aws_security_group.default.id], var.security_group_ids)
-  user_data              = base64encode(data.template_file.userdata.rendered)
+  user_data              = base64encode(local.userdata)
   key_name               = aws_key_pair.default.id
 
   iam_instance_profile {

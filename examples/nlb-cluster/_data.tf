@@ -38,7 +38,7 @@ data "aws_acm_certificate" "domain_host" {
 }
 
 data "aws_route53_zone" "selected" {
-  name  = local.workspace["hosted_zone"]
+  name = local.workspace["hosted_zone"]
 }
 
 data "aws_region" "current" {}
