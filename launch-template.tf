@@ -40,7 +40,7 @@ locals {
 resource "aws_launch_template" "default" {
   name_prefix = var.name
   image_id    = var.ami_id != "" ? var.ami_id : data.aws_ami.amazon-linux-2.image_id
-  /* instance_type          = var.instance_type */
+  instance_type          = var.instance_type
   vpc_security_group_ids = concat([aws_security_group.default.id], var.security_group_ids)
   user_data              = base64encode(data.template_file.userdata.rendered)
   key_name               = aws_key_pair.default.id
