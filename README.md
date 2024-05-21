@@ -56,6 +56,7 @@ In addition, you have the option to create:
 | instance\_count | Number of EC2 intances | `number` | `1` | no |
 | instance\_type | EC2 instance type | `string` | `"t2.micro"` | no |
 | instances\_subnet\_ids | List of private subnet IDs for EC2 instances (same number as instance\_count) | `list(any)` | n/a | yes |
+| launch\_template\_existed\_id | Uses an existing launch template | `string` | `""` | no |
 | lb\_scheme | Wheter to use an external ALB/NLB or internal (not applicable for EIP) | `string` | `"external"` | no |
 | lb\_subnet\_ids | List of subnet IDs for the ALB/NLB | `list(any)` | `[]` | no |
 | lb\_type | Either ALB, NLB or EIP to enable | `string` | `""` | no |
