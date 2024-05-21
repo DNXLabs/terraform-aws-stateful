@@ -137,7 +137,7 @@ variable "hostnames" {
   description = "Hostnames to be created on Route 53"
 }
 
-variable "launch_template_existed_id" {
+variable "launch_template_id" {
   default     = ""
   description = "Uses an existing launch template"
 }
