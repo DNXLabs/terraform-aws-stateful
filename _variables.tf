@@ -137,6 +137,11 @@ variable "hostnames" {
   description = "Hostnames to be created on Route 53"
 }
 
+variable "launch_template_existed_id" {
+  default     = ""
+  description = "Uses an existing launch template"
+}
+
 variable "ami_id" {
   default     = ""
   description = "AMI to use (leave blank to use latest Amazon Linux 2)"
