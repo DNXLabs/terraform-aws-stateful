@@ -9,13 +9,13 @@ resource "aws_autoscaling_group" "asg" {
 
     launch_template {
       launch_template_specification {
-        launch_template_id = aws_launch_template.default.id
+        launch_template_id =  var.launch_template_id != "" ? var.launch_template_id : aws_launch_template.default.id 
         version            = "$Latest"
       }
       override {
         instance_type = var.instance_type
         launch_template_specification {
-          launch_template_id = aws_launch_template.default.id
+          launch_template_id = var.launch_template_id != "" ? var.launch_template_id : aws_launch_template.default.id  
         }
       }
     }
