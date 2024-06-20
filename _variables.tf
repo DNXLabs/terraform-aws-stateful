@@ -125,11 +125,11 @@ variable "security_group_ids" {
 variable "sg_custom_ingress_rules" {
   type = list(object({
     description     = string
-    from_port       = optional(number)
-    to_port         = optional(number)
-    protocol        = optional(string)
-    cidr_blocks     = optional(list(string))
-    security_groups = optional(list(string))
+    from_port       = number
+    to_port         = number
+    protocol        = string
+    cidr_blocks     = list(string)
+    security_groups = list(string)
   }))
   default     = []
   description = "Which cidr blocks allowed to connect to the service"
@@ -138,9 +138,9 @@ variable "sg_custom_ingress_rules" {
 variable "sg_custom_egress_rules" {
   type = list(object({
     description = string
-    from_port   = optional(number)
-    to_port     = optional(number)
-    protocol    = optional(string)
+    from_port   = number
+    to_port     = number
+    protocol    = string
     cidr_blocks = list(string)
   }))
   default     = []
