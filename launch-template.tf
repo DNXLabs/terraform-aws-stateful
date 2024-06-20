@@ -1,5 +1,3 @@
-
-
 locals {
   userdata = templatefile("${path.module}/userdata.tpl",
     {
@@ -60,14 +58,18 @@ resource "aws_launch_template" "default" {
     }
   }
 
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = var.name
+    }
+  }
+
   lifecycle {
     create_before_destroy = true
   }
 }
-
-
-
-
 
 resource "tls_private_key" "default" {
   algorithm = "RSA"
