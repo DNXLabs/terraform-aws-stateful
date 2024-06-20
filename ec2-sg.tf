@@ -25,7 +25,7 @@ resource "aws_security_group" "default" {
       cidr_blocks = egress.value.cidr_blocks
     }
   }
-  
+
   tags = {
     Name = var.name
   }
