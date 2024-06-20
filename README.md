@@ -65,6 +65,8 @@ In addition, you have the option to create:
 | on\_demand\_percentage | on\_demand\_percentage | `number` | `0` | no |
 | security\_group\_ids | Extra security groups for instances | `list(any)` | `[]` | no |
 | sg\_cidr\_blocks | Which cidr blocks allowed to connect to the service | `list(any)` | `[]` | no |
+| sg\_custom\_egress\_rules | Which cidr blocks allowed to connect to the service | <pre>list(object({<br>    description = string<br>    from_port   = optional(number, 0)<br>    to_port     = optional(number, 0)<br>    protocol    = optional(string, "tcp")<br>    cidr_blocks = list(string)<br>  }))</pre> | `[]` | no |
+| sg\_custom\_ingress\_rules | Which cidr blocks allowed to connect to the service | <pre>list(object({<br>    description     = string<br>    from_port       = optional(number, 0)<br>    to_port         = optional(number, 0)<br>    protocol        = optional(string, "tcp")<br>    cidr_blocks     = optional(list(string))<br>    security_groups = optional(list(string), null)<br>  }))</pre> | `[]` | no |
 | tags | Additional resource tags | `map(string)` | `{}` | no |
 | tcp\_ports | List TCP ports to listen (only when lb\_type is NLB or EIP) | `list(any)` | `[]` | no |
 | udp\_ports | List of UDP ports to listen (only when lb\_type is NLB or EIP) | `list(any)` | `[]` | no |
