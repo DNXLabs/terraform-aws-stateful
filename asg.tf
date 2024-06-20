@@ -27,14 +27,11 @@ resource "aws_autoscaling_group" "asg" {
 
   }
 
-  # tags = concat(
-  #   [for key, value in var.tags : { key : key, value : value, propagate_at_launch : true }],
-  #   [{
-  #     key                 = "Name"
-  #     value               = var.name
-  #     propagate_at_launch = true
-  #   }]
-  # )
+  tag {
+    key                 = "Name"
+    value               = var.name
+    propagate_at_launch = true
+  }
 
   lifecycle {
     create_before_destroy = true
