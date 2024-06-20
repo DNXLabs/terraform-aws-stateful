@@ -122,6 +122,31 @@ variable "security_group_ids" {
   description = "Extra security groups for instances"
 }
 
+variable "sg_custom_ingress_rules" {
+  type = list(object({
+    description     = string
+    from_port       = optional(number, 0)
+    to_port         = optional(number, 0)
+    protocol        = optional(string, "tcp")
+    cidr_blocks     = optional(list(string))
+    security_groups = optional(list(string), null)
+  }))
+  default     = []
+  description = "Which cidr blocks allowed to connect to the service"
+}
+
+variable "sg_custom_egress_rules" {
+  type = list(object({
+    description = string
+    from_port   = optional(number, 0)
+    to_port     = optional(number, 0)
+    protocol    = optional(string, "tcp")
+    cidr_blocks = list(string)
+  }))
+  default     = []
+  description = "Which cidr blocks allowed to connect to the service"
+}
+
 variable "hostname_create" {
   default     = false
   description = "Wheter to create the hostnames on Route 53"
