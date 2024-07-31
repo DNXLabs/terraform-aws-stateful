@@ -46,15 +46,17 @@ resource "aws_launch_template" "default" {
     arn = aws_iam_instance_profile.default.arn
   }
 
+  dynamic "block_device_mappings" {
+    for_each = var.ebs_root_size > 0 ? [1] : []
+    content {
+      device_name = "/dev/sda1"
 
-  block_device_mappings {
-    device_name = "/dev/sda1"
-
-    ebs {
-      volume_size           = var.ebs_size
-      delete_on_termination = true
-      volume_type           = "gp2"
-      encrypted             = false
+      ebs {
+        volume_size           = var.ebs_root_size
+        delete_on_termination = true
+        volume_type           = "gp2"
+        encrypted             = false
+      }
     }
   }
 
