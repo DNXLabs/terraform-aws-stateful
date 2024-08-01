@@ -31,4 +31,4 @@ mkdir -p $${EBS_DIR}
 mount $${VOLUME} $${EBS_DIR}
 
 # Persist the volume in /etc/fstab so it gets mounted again
-echo '$${VOLUME} $${EBS_DIR} ext4 defaults,nofail 0 2' >> /etc/fstab
+echo "$${VOLUME} $${EBS_DIR} ext4 defaults,nofail 0 2" >> /etc/fstab
