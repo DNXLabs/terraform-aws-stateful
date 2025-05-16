@@ -19,7 +19,7 @@ resource "aws_lb" "alb" {
 resource "aws_lb_target_group" "alb_tg" {
   count    = var.lb_type == "ALB" ? 1 : 0
   name     = "tg-${var.name}"
-  port     = 80
+  port     = var.http_port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 }

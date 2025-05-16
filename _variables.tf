@@ -202,3 +202,9 @@ variable "tags" {
   description = "Additional resource tags"
   type        = map(string)
 }
+
+variable "http_port" {
+  default     = 80
+  description = "HTTP port to listen (only when lb_type is ALB"
+  type        = number
+}
