@@ -53,6 +53,7 @@ In addition, you have the option to create:
 | hosted\_zone | Route 53 hosted zone | `string` | `""` | no |
 | hostname\_create | Wheter to create the hostnames on Route 53 | `bool` | `false` | no |
 | hostnames | Hostnames to be created on Route 53 | `list(string)` | `[]` | no |
+| http\_port | HTTP port to listen (only when lb\_type is ALB | `number` | `80` | no |
 | instance\_count | Number of EC2 intances | `number` | `1` | no |
 | instance\_type | EC2 instance type | `string` | `"t2.micro"` | no |
 | instances\_subnet\_ids | List of private subnet IDs for EC2 instances (same number as instance\_count) | `list(any)` | n/a | yes |
