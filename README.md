@@ -52,7 +52,7 @@ In addition, you have the option to create:
 | fs\_type | Filesystem persistency to use: EFS or EBS | `string` | `"EFS"` | no |
 | hosted\_zone | Route 53 hosted zone | `string` | `""` | no |
 | hostname\_create | Wheter to create the hostnames on Route 53 | `bool` | `false` | no |
-| hostnames | Hostnames to be created on Route 53 | `list` | `[]` | no |
+| hostnames | Hostnames to be created on Route 53 | `list(string)` | `[]` | no |
 | instance\_count | Number of EC2 intances | `number` | `1` | no |
 | instance\_type | EC2 instance type | `string` | `"t2.micro"` | no |
 | instances\_subnet\_ids | List of private subnet IDs for EC2 instances (same number as instance\_count) | `list(any)` | n/a | yes |
@@ -60,7 +60,7 @@ In addition, you have the option to create:
 | lb\_scheme | Wheter to use an external ALB/NLB or internal (not applicable for EIP) | `string` | `"external"` | no |
 | lb\_subnet\_ids | List of subnet IDs for the ALB/NLB | `list(any)` | `[]` | no |
 | lb\_type | Either ALB, NLB or EIP to enable | `string` | `""` | no |
-| name | Name of this EC2 Instance | `any` | n/a | yes |
+| name | Name of this EC2 Instance | `string` | n/a | yes |
 | on\_demand\_base\_capacity | on\_demand\_base\_capacity | `number` | `0` | no |
 | on\_demand\_percentage | on\_demand\_percentage | `number` | `0` | no |
 | security\_group\_ids | Extra security groups for instances | `list(any)` | `[]` | no |
@@ -71,7 +71,7 @@ In addition, you have the option to create:
 | tcp\_ports | List TCP ports to listen (only when lb\_type is NLB or EIP) | `list(any)` | `[]` | no |
 | udp\_ports | List of UDP ports to listen (only when lb\_type is NLB or EIP) | `list(any)` | `[]` | no |
 | userdata | Extra commands to pass to userdata | `string` | `""` | no |
-| vpc\_id | VPC ID to deploy the EC2/default cluster | `any` | n/a | yes |
+| vpc\_id | VPC ID to deploy the EC2/default cluster | `string` | n/a | yes |
 
 ## Outputs
 

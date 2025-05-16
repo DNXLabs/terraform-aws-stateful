@@ -1,35 +1,42 @@
 variable "name" {
   description = "Name of this EC2 Instance"
+  type        = string
 }
 
 variable "instance_type" {
   default     = "t2.micro"
   description = "EC2 instance type"
+  type        = string
 }
 
 variable "on_demand_base_capacity" {
   description = "on_demand_base_capacity"
   default     = 0
+  type        = number
 }
 
 variable "on_demand_percentage" {
   description = "on_demand_percentage"
   default     = 0
+  type        = number
 }
 
 variable "instance_count" {
   default     = 1
   description = "Number of EC2 intances"
+  type        = number
 }
 
 variable "lb_type" {
   default     = ""
   description = "Either ALB, NLB or EIP to enable"
+  type        = string
 }
 
 variable "lb_scheme" {
   default     = "external"
   description = "Wheter to use an external ALB/NLB or internal (not applicable for EIP)"
+  type        = string
 }
 
 variable "tcp_ports" {
@@ -53,6 +60,7 @@ variable "sg_cidr_blocks" {
 variable "certificate_arn" {
   default     = ""
   description = "Certificate ARN to be used on the ALB"
+  type        = string
 }
 
 variable "userdata" {
@@ -63,36 +71,43 @@ variable "userdata" {
 variable "fs_type" {
   default     = "EFS"
   description = "Filesystem persistency to use: EFS or EBS"
+  type        = string
 }
 
 variable "efs_mount_dir" {
   default     = "/mnt/efs"
   description = "Custom EFS mount point - e.g /home"
+  type        = string
 }
 
 variable "ebs_size" {
   default     = 40
   description = "Size of EBS volumes in GB"
+  type        = number
 }
 
 variable "ebs_encrypted" {
   default     = true
   description = "Encrypts EBS volume"
+  type        = bool
 }
 
 variable "ebs_kms_key_id" {
   default     = ""
   description = "Encrypts EBS volume with custom KMS key (requires ebs_encrypted=true)"
+  type        = string
 }
 
 variable "ebs_type" {
   default     = "gp2"
   description = "EBS volume type"
+  type        = string
 }
 
 variable "ebs_mount_dir" {
   default     = "/mnt/ebs"
   description = "Custom EBS mount point - e.g /home"
+  type        = string
 }
 
 variable "instances_subnet_ids" {
@@ -114,6 +129,7 @@ variable "efs_subnet_ids" {
 
 variable "vpc_id" {
   description = "VPC ID to deploy the EC2/default cluster"
+  type        = string
 }
 
 variable "security_group_ids" {
@@ -155,21 +171,25 @@ variable "hostname_create" {
 variable "hosted_zone" {
   default     = ""
   description = "Route 53 hosted zone"
+  type        = string
 }
 
 variable "hostnames" {
   default     = []
   description = "Hostnames to be created on Route 53"
+  type        = list(string)
 }
 
 variable "launch_template_id" {
   default     = ""
   description = "Uses an existing launch template"
+  type        = string
 }
 
 variable "ami_id" {
   default     = ""
   description = "AMI to use (leave blank to use latest Amazon Linux 2)"
+  type        = string
 }
 
 variable "cwlog_files" {
