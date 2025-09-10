@@ -1,3 +1,10 @@
+locals {
+  all_tags = merge(
+    data.aws_default_tags.current.tags,
+    var.tags
+  )
+}
+
 resource "aws_autoscaling_group" "asg" {
   count               = var.instance_count
   name                = "${var.name}-${count.index}"
@@ -27,6 +34,16 @@ resource "aws_autoscaling_group" "asg" {
 
   }
 
+  dynamic "tag" {
+    for_each = local.all_tags
+
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+  }
+  
   tag {
     key                 = "Name"
     value               = var.name

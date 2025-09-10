@@ -1,5 +1,7 @@
 data "aws_region" "current" {}
 
+data "aws_default_tags" "current" {}
+
 data "aws_ami" "amazon-linux-2" {
   most_recent = true
   owners      = ["amazon"]
