@@ -1,6 +1,6 @@
 locals {
   all_tags = merge(
-    data.aws_default_tags.current.tags,
+    coalesce(data.aws_default_tags.current.tags, {}),
     var.tags
   )
 }
