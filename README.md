@@ -49,6 +49,7 @@ In addition, you have the option to create:
 | ebs\_type | EBS volume type | `string` | `"gp2"` | no |
 | efs\_mount\_dir | Custom EFS mount point - e.g /home | `string` | `"/mnt/efs"` | no |
 | efs\_subnet\_ids | List of secure subnet IDs for EFS | `list(any)` | `[]` | no |
+| enable\_schedule | Enables schedule to shut down and start up instances outside business hours | `bool` | `false` | no |
 | fs\_type | Filesystem persistency to use: EFS or EBS | `string` | `"EFS"` | no |
 | hosted\_zone | Route 53 hosted zone | `string` | `""` | no |
 | hostname\_create | Wheter to create the hostnames on Route 53 | `bool` | `false` | no |
@@ -64,6 +65,8 @@ In addition, you have the option to create:
 | name | Name of this EC2 Instance | `string` | n/a | yes |
 | on\_demand\_base\_capacity | on\_demand\_base\_capacity | `number` | `0` | no |
 | on\_demand\_percentage | on\_demand\_percentage | `number` | `0` | no |
+| schedule\_cron\_start | Cron expression to define when to trigger a start of the auto-scaling group. E.g. '0 20 \* \* MON-FRI' to start at 8pm GMT Mon-Fri | `string` | `""` | no |
+| schedule\_cron\_stop | Cron expression to define when to trigger a stop of the auto-scaling group. E.g. '0 10 \* \* MON-FRI' to stop at 10am GMT Mon-Fri | `string` | `""` | no |
 | security\_group\_ids | Extra security groups for instances | `list(any)` | `[]` | no |
 | sg\_cidr\_blocks | Which cidr blocks allowed to connect to the service | `list(any)` | `[]` | no |
 | sg\_custom\_egress\_rules | Which cidr blocks allowed to connect to the service | <pre>list(object({<br>    description = string<br>    from_port   = number<br>    to_port     = number<br>    protocol    = string<br>    cidr_blocks = list(string)<br>  }))</pre> | `[]` | no |

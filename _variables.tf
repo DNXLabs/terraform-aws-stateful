@@ -208,3 +208,21 @@ variable "http_port" {
   description = "HTTP port to listen (only when lb_type is ALB"
   type        = number
 }
+# Shutdown schedule variables
+variable "enable_schedule" {
+  default     = false
+  description = "Enables schedule to shut down and start up instances outside business hours"
+  type        = bool
+}
+
+variable "schedule_cron_start" {
+  type        = string
+  default     = ""
+  description = "Cron expression to define when to trigger a start of the auto-scaling group. E.g. '0 20 * * MON-FRI' to start at 8pm GMT Mon-Fri"
+}
+
+variable "schedule_cron_stop" {
+  type        = string
+  default     = ""
+  description = "Cron expression to define when to trigger a stop of the auto-scaling group. E.g. '0 10 * * MON-FRI' to stop at 10am GMT Mon-Fri"
+}
