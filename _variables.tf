@@ -80,6 +80,11 @@ variable "efs_mount_dir" {
   type        = string
 }
 
+variable "ebs_root_size" {
+  default     = 40
+  description = "Size of EBS root volume in GB"
+}
+
 variable "ebs_size" {
   default     = 40
   description = "Size of EBS volumes in GB"

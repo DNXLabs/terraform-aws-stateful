@@ -2,7 +2,7 @@
 echo "### SETUP CLOUDWATCH LOGS AGENT"
 
 yum update -y
-yum install -y awslogs
+yum install -y awslogs amazon-cloudwatch-agent
 
 # UNTESTED CODE BELOW
 cat <<EOF >> /tmp/cwlogs-config.json

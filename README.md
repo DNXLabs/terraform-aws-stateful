@@ -45,6 +45,7 @@ In addition, you have the option to create:
 | ebs\_encrypted | Encrypts EBS volume | `bool` | `true` | no |
 | ebs\_kms\_key\_id | Encrypts EBS volume with custom KMS key (requires ebs\_encrypted=true) | `string` | `""` | no |
 | ebs\_mount\_dir | Custom EBS mount point - e.g /home | `string` | `"/mnt/ebs"` | no |
+| ebs\_root\_size | Size of EBS root volume in GB | `number` | `40` | no |
 | ebs\_size | Size of EBS volumes in GB | `number` | `40` | no |
 | ebs\_type | EBS volume type | `string` | `"gp2"` | no |
 | efs\_mount\_dir | Custom EFS mount point - e.g /home | `string` | `"/mnt/efs"` | no |
